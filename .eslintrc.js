@@ -17,10 +17,12 @@ module.exports = {
     "no-trailing-spaces": "off",
     "max-len": "off",
     "indent": "off",
-    "object-curly-newline": ["error", "always"],
     "eol-last": ["error", "never"],
     "comma-dangle": ["error", "never"],
     "semi": ["error", "always"],
+    "object-curly-newline": ["error", {
+      "ImportDeclaration": "never",
+    }],
   },
   overrides: [
     {
