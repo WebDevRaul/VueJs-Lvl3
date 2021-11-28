@@ -1,22 +1,17 @@
 <template>
   <Header />
-  <Introduction />
-  <Main />
+  <router-view></router-view>
   <Player />
   <Auth />
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Introduction from './components/Introduction.vue';
-import Main from './components/Main.vue';
-import Player from './components/Player.vue';
-import Auth from './components/Auth.vue';
+import Header from '@/components/Header.vue';
+import Player from '@/components/Player.vue';
+import Auth from '@/components/Auth.vue';
 
 export default {
   name: 'App',
-  components: { 
-    Header, Introduction, Main, Player, Auth 
-  }
+  components: { Header, Player, Auth }
 };
 </script>

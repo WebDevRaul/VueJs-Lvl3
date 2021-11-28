@@ -42,31 +42,39 @@
           </ul>
 
           <!-- Login Form -->
-          <form v-show="tab">
+          <VeeForm v-show="tab" :validation-schema="loginSchema" @submit="onSubmitLogin">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input type="email"
+              <VeeField 
+                name='email' 
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
                   duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Enter Email" />
+                placeholder="Enter Email" 
+                type="email"
+              />
+                <ErrorMessage class="text-red-600" name='email' />
             </div>
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <input type="password"
+              <VeeField 
+                name="password" 
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
                   duration-500 focus:outline-none focus:border-black rounded"
-                placeholder="Password" />
+                placeholder="Password" 
+                type="password"
+              />
+                <ErrorMessage class="text-red-600" name='password' />
             </div>
             <button type="submit"
               class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
                 hover:bg-purple-700">
               Submit
             </button>
-          </form>
+          </VeeForm>
           <!-- Registration Form -->
-          <VeeForm v-show="!tab" :validation-schema="schema" :initial-values="values" @submit="onSubmit">
+          <VeeForm v-show="!tab" :validation-schema="schema" :initial-values="values" @submit="onSubmitRegister">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -178,13 +186,28 @@ import { mapState, mapMutations } from 'vuex';
           country: 'required|country_excluded:Antartica',
           tos: 'tos'
         },
+        loginSchema: {
+          email: 'required|min:2|max:100|email',
+          password: 'required|min:8|max:100'
+        },
         values: {
           country: 'USA'
         }
       };
     },
     methods: {
-      ...mapMutations({ onToggle: 'toggleAuthModal' })
+      ...mapMutations({ onToggle: 'toggleAuthModal' }),
+      onSubmitLogin(values) {
+        console.log(values);
+        try {
+          this.$store.dispatch('login', (values));
+        } catch (e) {
+          console.log(e);
+        }
+      },
+      onSubmitRegister(values) {
+        console.log(values);
+      }
     },
     computed: {
       ...mapState({ state: 'modal' })
