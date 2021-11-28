@@ -1,6 +1,6 @@
 <template>
     <!-- Auth Modal -->
-  <div class="fixed z-10 inset-0 overflow-y-auto" id="modal" :class="{ hidden: showModal }">
+  <div class="fixed z-10 inset-0 overflow-y-auto" id="modal" :class="{ hidden: !state }">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center 
       sm:block sm:p-0">
       <div class="fixed inset-0 transition-opacity">
@@ -19,7 +19,7 @@
           <div class="flex justify-between items-center pb-4">
             <p class="text-2xl font-bold">Your Account</p>
             <!-- Modal Close Button -->
-            <div class="modal-close cursor-pointer z-50" @click.prevent="toggleAuthModal">
+            <div class="modal-close cursor-pointer z-50" @click.prevent="onToggle">
               <i class="fas fa-times"></i>
             </div>
           </div>
@@ -130,15 +130,15 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
   export default {
     name: 'Auth',
     methods: {
-      ...mapMutations(['toggleAuthModal'])
+      ...mapMutations({ onToggle: 'toggleAuthModal' })
     },
     computed: {
-      ...mapGetters(['showModal'])
+      ...mapState({ state: 'modal' })
     }
   };
 </script>

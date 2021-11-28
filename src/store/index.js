@@ -10,7 +10,7 @@ export default createStore({
     }
   },
   getters: {
-    showModal: (state) => state.modal
+
   },
   actions: {
   },
