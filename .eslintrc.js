@@ -22,7 +22,7 @@ module.exports = {
     "semi": ["error", "always"],
     "object-curly-newline": ["error", {
       "ImportDeclaration": "never",
-    }],
+    }]
   },
   overrides: [
     {
